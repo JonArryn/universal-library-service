@@ -16,7 +16,8 @@
             $request->validated($request->all());
 
             if (! Auth::attempt($request->only('email', 'password'))) {
-                return $this->error('Credentials Do Not Match', 200, 401);
+
+                return $this->error('Credentials Do Not Match. Could not log you in.', 400, 400);
             }
 
             $user = User::firstWhere('email', $request->email);
@@ -28,7 +29,7 @@
                 ]
             );
         }
-        
+
         public function register() {
             return $this->ok('register');
         }

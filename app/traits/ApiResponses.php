@@ -22,8 +22,12 @@
 
         protected function error($message, $statusCode, $responseStatus): JsonResponse {
             return response()->json([
-                'message' => $message,
-                'status'  => $responseStatus
+                'status'  => $responseStatus,
+                'errors'  => [
+                    'generic' => $message,
+                ],
+                'message' => $message
+
             ], $statusCode);
         }
     }

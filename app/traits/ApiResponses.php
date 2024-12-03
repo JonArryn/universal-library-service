@@ -7,11 +7,11 @@
 
     trait ApiResponses
     {
-        protected function ok($message, $data = [], $statusCode = 200): JsonResponse {
+        protected function ok(string $message, array $data = [], int $statusCode = 200): JsonResponse {
             return $this->success($message, $data, $statusCode);
         }
 
-        protected function success($message, $data = [], $statusCode = 200): JsonResponse {
+        protected function success(string $message, array $data = [], int $statusCode = 200): JsonResponse {
             return response()->json([
 
                 'message' => $message,
@@ -20,7 +20,7 @@
             ], $statusCode);
         }
 
-        protected function error($message, $statusCode, $responseStatus): JsonResponse {
+        protected function error(string $message, int $statusCode, int $responseStatus): JsonResponse {
             return response()->json([
                 'status'  => $responseStatus,
                 'errors'  => [
@@ -29,6 +29,10 @@
                 'message' => $message
 
             ], $statusCode);
+        }
+
+        protected function notAuthorized($message = "You are not authorized to perform this action.") {
+            return $this->error($message, 403, 403);
         }
     }
 

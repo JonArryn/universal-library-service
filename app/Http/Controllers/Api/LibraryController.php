@@ -1,9 +1,10 @@
 <?php
 
-    namespace App\Http\Controllers;
+    namespace App\Http\Controllers\Api;
 
-    use App\Http\Requests\Library\StoreLibraryRequest;
-    use App\Http\Requests\Library\UpdateLibraryRequest;
+    use App\Http\Controllers\Controller;
+    use App\Http\Requests\Api\Library\StoreLibraryRequest;
+    use App\Http\Requests\Api\Library\UpdateLibraryRequest;
     use App\Models\Library;
 
     class LibraryController extends Controller

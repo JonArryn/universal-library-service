@@ -30,10 +30,6 @@
             );
         }
 
-        public function register() {
-            return $this->ok('register');
-        }
-
         public function logout(Request $request) {
             Auth::logout();
 
@@ -41,6 +37,10 @@
 
             $request->session()->regenerateToken();
 
+            if ($request->user()->currentAccessToken()) {
+                $request->user()->currentAccessToken()->delete();
+            }
+            
             return $this->ok('Logged out');
         }
     }

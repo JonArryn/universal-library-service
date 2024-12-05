@@ -31,16 +31,12 @@
         }
 
         public function logout(Request $request) {
-            Auth::logout();
+            Auth::guard('web')->logout();
 
             $request->session()->invalidate();
 
             $request->session()->regenerateToken();
 
-            if ($request->user()->currentAccessToken()) {
-                $request->user()->currentAccessToken()->delete();
-            }
-            
             return $this->ok('Logged out');
         }
     }

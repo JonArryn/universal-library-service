@@ -24,7 +24,7 @@
             return response()->json([
                 'status'  => $responseStatus,
                 'errors'  => [
-                    'generic' => $message,
+                    'generic' => [$message],
                 ],
                 'message' => $message
 

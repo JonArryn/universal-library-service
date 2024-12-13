@@ -2,6 +2,7 @@
 
     namespace Database\Seeders;
 
+    use App\Models\Library;
     use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,9 +16,14 @@
         public function run(): void {
             // User::factory(10)->create();
 
-            User::factory()->create([
+            $user = User::factory()->create([
                 'name'  => 'Jon Arryn',
                 'email' => 'development@arryn.net',
+            ]);
+
+            Library::create([
+                'name'    => 'Arryn Library',
+                'user_id' => $user->id
             ]);
         }
     }

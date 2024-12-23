@@ -7,11 +7,11 @@
 
     trait ApiResponses
     {
-        protected function ok(string $message, array $data = [], int $statusCode = 200): JsonResponse {
+        protected function ok(string $message, mixed $data = [], int $statusCode = 200): JsonResponse {
             return $this->success($message, $data, $statusCode);
         }
 
-        protected function success(string $message, array $data = [], int $statusCode = 200): JsonResponse {
+        protected function success(string $message, mixed $data = [], int $statusCode = 200): JsonResponse {
             return response()->json([
 
                 'message' => $message,

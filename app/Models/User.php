@@ -5,6 +5,7 @@
     // use Illuminate\Contracts\Auth\MustVerifyEmail;
     use Illuminate\Database\Eloquent\Factories\HasFactory;
     use Illuminate\Database\Eloquent\Relations\HasMany;
+    use Illuminate\Database\Eloquent\Relations\HasManyThrough;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Notifications\Notifiable;
     use Laravel\Sanctum\HasApiTokens;
@@ -49,5 +50,9 @@
 
         public function library(): HasMany {
             return $this->hasMany(Library::class);
+        }
+
+        public function book(): HasManyThrough {
+            return $this->hasManyThrough(Book::class, Library::class);
         }
     }

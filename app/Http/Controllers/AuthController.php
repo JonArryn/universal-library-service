@@ -21,7 +21,7 @@
             }
 
             $user = User::firstWhere('email', $request->email);
-
+            $request->session()->regenerate();
             return $this->ok(
                 'Authenticated',
                 [

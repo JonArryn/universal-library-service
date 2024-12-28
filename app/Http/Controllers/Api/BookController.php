@@ -1,18 +1,13 @@
 <?php
 
-    namespace App\Http\Controllers;
+    namespace App\Http\Controllers\Api;
 
-    use App\Http\Controllers\Api\ApiController;
     use App\Http\Filters\BookFilter;
     use App\Http\Requests\Api\Book\StoreBookRequest;
     use App\Http\Requests\Api\Book\UpdateBookRequest;
-    use App\Http\Resources\BaseResourceCollection;
     use App\Http\Resources\BookResource;
-    use App\Http\Resources\BookResourceCollection;
     use App\Models\Book;
     use App\Policies\BookPolicy;
-    use Illuminate\Http\Request;
-    use Illuminate\Support\Facades\Auth;
 
     class BookController extends ApiController
     {
@@ -26,12 +21,11 @@
                 return $this->notAuthorized('You are not authorized to view books that do not belong to libraries you do not own');
             }
 
-            return BookResource::collection(Book::filter($filters)->paginate());
+            $books = Book::filter($filters)->paginate();
 
-//            $userBooks = Auth::user()->book()->paginate();
-//            return BookResource::collection($userBooks);
-
+            return BookResource::collection($books);
         }
+
 
         /**
          * Store a newly created resource in storage.

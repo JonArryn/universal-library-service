@@ -27,7 +27,7 @@
 
             // Handle includes if present in the query
             if ($this->request->has('include')) {
-                $this->include($this->request->input('include'));
+                $this->applyInclude($this->request->input('include'));
             }
 
             return $builder;
@@ -43,11 +43,11 @@
             return $this->builder;
         }
 
-        protected function include($value): void {
+        protected function applyInclude($value): void {
             $relationships = explode(',', $value);
 
             foreach ($relationships as $relationship) {
-                // Only include relationships that are in the $allowedIncludes array
+                // Only include relationships explicitly allowed
                 if (in_array($relationship, $this->allowedIncludes)) {
                     $this->builder->with($relationship);
                 }

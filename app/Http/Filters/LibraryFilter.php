@@ -2,9 +2,9 @@
 
     namespace App\Http\Filters;
 
-    class LibraryFilter
+    class LibraryFilter extends BaseFilter
     {
         public function status($value) {
-            return $this->builder->where('stats', $value);
+            return $this->builder->where('status', $value);
         }
     }

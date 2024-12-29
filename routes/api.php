@@ -1,6 +1,7 @@
 <?php
 
     use App\Http\Controllers\Api\BookController;
+    use App\Http\Controllers\Api\LibraryBookController;
     use App\Http\Controllers\Api\LibraryController;
     use App\Http\Controllers\Api\UserController;
     use App\Http\Controllers\AuthController;
@@ -21,10 +22,11 @@
         // book
         Route::get('/book', [BookController::class, 'index']);
         Route::post('/book', [BookController::class, 'store']);
-        
+
         // library
         Route::get('/library', [LibraryController::class, 'index']);
         Route::post('/library', [LibraryController::class, 'store']);
+        Route::get('/library/{libraryId}/book', [LibraryBookController::class, 'index']);
 
     });
 

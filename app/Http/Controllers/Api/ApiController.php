@@ -11,8 +11,7 @@
 
         protected $policyClass;
 
-        public function isAble($ability, $targetModel) {
-            $gate = Gate::policy($targetModel, $this->policyClass);
-            return $gate->authorize($ability, [$targetModel]);
+        public function isAble($ability, $modelInstance) {
+            return Gate::allows($ability, $modelInstance);
         }
     }

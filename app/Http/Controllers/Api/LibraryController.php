@@ -42,7 +42,11 @@
          * Display the specified resource.
          */
         public function show(Library $library) {
-            //
+            if (! $this->isAble('view', $library)) { // Pass the specific $library instance
+                return $this->notAuthorized('You are not authorized to view the requested library data');
+            }
+
+            return $this->ok('success', new LibraryResource($library));
         }
 
         /**

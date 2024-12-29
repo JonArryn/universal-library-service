@@ -30,7 +30,7 @@
             }
             $user = User::create($request->mappedAttributes());
             Auth::login($user);
-            return $this->ok('Success',
+            return $this->ok('success',
                 ['user' => new UserResource($user)],
                 201);
         }

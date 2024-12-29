@@ -7,6 +7,7 @@
     use Illuminate\Database\Eloquent\Relations\BelongsTo;
     use Illuminate\Database\Eloquent\Relations\HasMany;
     use Illuminate\Notifications\Notifiable;
+    use Illuminate\Support\Facades\Auth;
     use Laravel\Sanctum\HasApiTokens;
 
     class Library extends Model
@@ -14,9 +15,15 @@
         use HasFactory;
 
         protected $fillable = [
-            'user_id',
-            'name'
+            'name',
+            // 'user_id' is intentionally excluded to prevent mass assignment
         ];
+
+        protected static function booted(): void {
+            static::creating(function ($library) {
+                $library->user_id = Auth::id();
+            });
+        }
 
         public function user(): BelongsTo {
             return $this->belongsTo(User::class);

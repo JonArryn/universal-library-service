@@ -5,7 +5,7 @@
     use Illuminate\Foundation\Http\FormRequest;
     use Illuminate\Support\Facades\Auth;
 
-    class StoreLibraryRequest extends FormRequest
+    class StoreLibraryRequest extends BaseLibraryRequest
     {
         /**
          * Determine if the user is authorized to make this request.

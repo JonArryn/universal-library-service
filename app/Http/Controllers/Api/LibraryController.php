@@ -19,7 +19,7 @@
          * Display a listing of the resource.
          */
         public function index(Request $request) {
-            if (! $this->isAble('create', Library::class)) {
+            if (! $this->isAble('viewAny', Library::class)) {
                 return $this->notAuthorized('You are not authorized to view libraries');
             }
             $userLibraries = LibraryResource::collection(Auth::user()->library()->paginate());
@@ -30,7 +30,12 @@
          * Store a newly created resource in storage.
          */
         public function store(StoreLibraryRequest $request) {
-            //
+            if (! $this->isAble('create', Library::class)) {
+                return $this->notAuthorized('You are not authorized to create libraries');
+            }
+
+            $library = Library::create($request->mappedAttributes());
+            return $this->ok('success', ['library' => new LibraryResource($library)], 201);
         }
 
         /**

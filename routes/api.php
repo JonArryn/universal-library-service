@@ -11,12 +11,20 @@
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [UserController::class, 'store']);
 
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    })->middleware('auth:sanctum');
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        // session
+        Route::post('/logout', [AuthController::class, 'logout']);
+        Route::get('/user', function (Request $request) {
+            return $request->user();
+        });
+        // book
+        Route::get('/book', [BookController::class, 'index']);
+        Route::post('/book', [BookController::class, 'store']);
+        
+        // library
+        Route::get('/library', [LibraryController::class, 'index']);
+        Route::post('/library', [LibraryController::class, 'store']);
 
-    Route::get('/library', [LibraryController::class, 'index'])->middleware('auth:sanctum');
-    Route::get('/book', [BookController::class, 'index'])->middleware('auth:sanctum');
-    Route::post('/book', [BookController::class, 'store'])->middleware('auth:sanctum');
+    });
+

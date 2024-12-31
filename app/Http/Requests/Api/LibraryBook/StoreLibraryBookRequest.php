@@ -1,16 +1,8 @@
 <?php
 
-    namespace App\Http\Requests\Api\Book;
+    namespace App\Http\Requests\Api\LibraryBook;
 
-    use App\Models\Book;
-    use App\Rules\ValidLibraryOwnership;
-    use Illuminate\Foundation\Http\FormRequest;
-    use phpDocumentor\Reflection\DocBlock\Tags\Mixin;
-
-    /**
-     * @Mixin Book
-     */
-    class StoreBookRequest extends BaseBookRequest
+    class StoreLibraryBookRequest extends BaseLibraryBookRequest
     {
         /**
          * Determine if the user is authorized to make this request.
@@ -29,7 +21,6 @@
                 'title'       => 'required|string|max:99',
                 'authorName'  => 'required|string|max:99',
                 'description' => 'string|max:254',
-                'libraryId'   => ['required', 'string', 'max:254', 'exists:libraries,id']
             ];
         }
     }

@@ -3,6 +3,7 @@
     namespace App\Policies;
 
     use App\Models\Book;
+    use App\Models\Library;
     use App\Models\User;
     use Illuminate\Auth\Access\Response;
 
@@ -25,8 +26,8 @@
         /**
          * Determine whether the user can create models.
          */
-        public function create(User $user): bool {
-            return true;
+        public function create(User $user, Book $book): bool {
+            return $user->id === $book->library->user_id;
         }
 
         /**

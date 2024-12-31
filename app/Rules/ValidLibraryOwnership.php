@@ -5,6 +5,7 @@
     use App\Models\Library;
     use Closure;
     use Illuminate\Contracts\Validation\ValidationRule;
+    use Illuminate\Support\Facades\Auth;
 
     class ValidLibraryOwnership implements ValidationRule
     {

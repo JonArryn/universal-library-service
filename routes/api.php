@@ -27,7 +27,8 @@
         Route::get('/library', [LibraryController::class, 'index']);
         Route::get('/library/{library}', [LibraryController::class, 'show']);
         Route::post('/library', [LibraryController::class, 'store']);
-        Route::get('/library/{libraryId}/book', [LibraryBookController::class, 'index']);
+        Route::get('/library/{library}/book', [LibraryBookController::class, 'index']);
+        Route::post('/library/{library}/book', [LibraryBookController::class, 'store']);
 
     });
 

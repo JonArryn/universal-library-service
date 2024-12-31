@@ -8,6 +8,8 @@
     use App\Http\Resources\BookResource;
     use App\Models\Book;
     use App\Policies\BookPolicy;
+    use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Auth;
 
     class BookController extends ApiController
     {
@@ -16,13 +18,12 @@
         /**
          * Display a listing of the resource.
          */
-        public function index(BookFilter $filters) {
-            if (! $this->isAble('viewAny', Book::class)) {
+        public function index(BookFilter $filters, Request $request) {
+            if ($request->user()->cannot('viewAny', Book::class)) {
                 return $this->notAuthorized('You are not authorized to view books that do not belong to libraries you do not own');
             }
 
-            $books = Book::filter($filters)->paginate();
-
+            $books = Auth::user()->book()->filter($filters)->paginate(15);
             return BookResource::collection($books);
         }
 

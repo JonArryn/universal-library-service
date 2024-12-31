@@ -19,5 +19,12 @@
             $this->builder->where('author_name', $value);
         }
 
+        public function search($value): void {
+            $this->builder->where(function ($query) use ($value) {
+                $query->where('title', 'like', "%{$value}%")
+                    ->orWhere('author_name', 'like', "%{$value}%");
+            });
+        }
+
 
     }

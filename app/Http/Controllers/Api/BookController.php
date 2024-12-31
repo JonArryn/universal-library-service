@@ -32,7 +32,7 @@
          * Store a newly created resource in storage.
          */
         public function store(StoreBookRequest $request) {
-            if (! $this->isAble('store', Book::class)) {
+            if (Auth::user()->cannot('store', Book::class)) {
                 return $this->notAuthorized('You are not authorized to create books');
             }
 
@@ -45,7 +45,7 @@
          * Display the specified resource.
          */
         public function show(Book $book, BookFilter $filters, Request $request) {
-            if ($request->user()->cannot('view', $book)) {
+            if (Auth::user()->cannot('view', $book)) {
                 return $this->notAuthorized('You are not authorized to view this book');
             }
             $filteredBook = Book::filter($filters)->find($book->id);
@@ -65,6 +65,10 @@
          * Remove the specified resource from storage.
          */
         public function destroy(Book $book) {
-            //
+            if (Auth::user()->cannot('delete', $book)) {
+                return $this->notAuthorized('You are not authorized to delete this book');
+            }
+            $book->delete();
+            return $this->ok('success', [], 204);
         }
     }

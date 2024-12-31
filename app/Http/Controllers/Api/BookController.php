@@ -44,8 +44,14 @@
         /**
          * Display the specified resource.
          */
-        public function show(Book $book) {
-            //
+        public function show(Book $book, BookFilter $filters, Request $request) {
+            if ($request->user()->cannot('view', $book)) {
+                return $this->notAuthorized('You are not authorized to view this book');
+            }
+            $filteredBook = Book::filter($filters)->find($book->id);
+            return $this->ok('success',
+                new BookResource($filteredBook)
+            );
         }
 
         /**

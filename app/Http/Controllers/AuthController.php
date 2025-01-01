@@ -13,7 +13,6 @@
         use ApiResponses;
 
         public function login(ApiLoginRequest $request) {
-            $request->validated($request->all());
 
             if (! Auth::attempt($request->only('email', 'password'))) {
 

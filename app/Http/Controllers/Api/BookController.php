@@ -58,7 +58,13 @@
          * Update the specified resource in storage.
          */
         public function update(UpdateBookRequest $request, Book $book) {
-            //
+            if (Auth::user()->cannot('update', $book)) {
+                return $this->notAuthorized('You are not authorized to update this book');
+            }
+            $book->update($request->mappedAttributes());
+            return $this->ok('success',
+                ['book' => new BookResource($book)]
+            );
         }
 
         /**

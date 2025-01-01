@@ -10,7 +10,7 @@
          * Determine if the user is authorized to make this request.
          */
         public function authorize(): bool {
-            return false;
+            return true;
         }
 
         /**
@@ -20,7 +20,10 @@
          */
         public function rules(): array {
             return [
-                //
+                'title'       => 'required|string|max:99',
+                'authorName'  => 'required|string|max:99',
+                'description' => 'string|max:254',
+                'libraryId'   => ['required', 'integer', 'max:254', 'exists:libraries,id']
             ];
         }
     }

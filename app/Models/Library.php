@@ -16,6 +16,7 @@
 
         protected $fillable = [
             'name',
+            'user_id'
             // 'user_id' is intentionally excluded to prevent mass assignment
         ];
 

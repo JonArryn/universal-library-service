@@ -13,7 +13,7 @@
             Schema::create('books', function (Blueprint $table) {
                 $table->id();
                 $table->foreignIdFor(Library::class);
-                $table->string('title')->unique();
+                $table->string('title');
                 $table->string('author_name');
                 $table->text('description');
                 $table->timestamps();

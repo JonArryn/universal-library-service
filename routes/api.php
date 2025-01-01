@@ -12,14 +12,14 @@
 
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [UserController::class, 'store']);
-
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    })->middleware('auth:sanctum');
 
     Route::group(['middleware' => 'auth:sanctum'], function () {
         // session
         Route::post('/logout', [AuthController::class, 'logout']);
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        });
+
         // book
         Route::get('/book', [BookController::class, 'index']);
         Route::get('/book/{book}', [BookController::class, 'show']);

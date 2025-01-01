@@ -2,9 +2,10 @@
 
     namespace App\Http\Requests\Api\Book;
 
+    use App\Http\Requests\Api\ValidatesRequest;
     use Illuminate\Foundation\Http\FormRequest;
 
-    class UpdateBookRequest extends BaseBookRequest
+    class UpdateBookRequest extends BaseBookRequest implements ValidatesRequest
     {
         /**
          * Determine if the user is authorized to make this request.

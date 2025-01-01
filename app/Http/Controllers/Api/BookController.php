@@ -5,6 +5,7 @@
     use App\Http\Filters\BookFilter;
     use App\Http\Requests\Api\Book\StoreBookRequest;
     use App\Http\Requests\Api\Book\UpdateBookRequest;
+    use App\Http\Requests\Api\ValidatesRequest;
     use App\Http\Resources\BookResource;
     use App\Models\Book;
     use App\Policies\BookPolicy;
@@ -31,7 +32,7 @@
         /**
          * Store a newly created resource in storage.
          */
-        public function store(StoreBookRequest $request) {
+        public function store(ValidatesRequest $request) {
             if (Auth::user()->cannot('store', Book::class)) {
                 return $this->notAuthorized('You are not authorized to create books');
             }
@@ -44,7 +45,7 @@
         /**
          * Display the specified resource.
          */
-        public function show(Book $book, BookFilter $filters, Request $request) {
+        public function show(Book $book, BookFilter $filters) {
             if (Auth::user()->cannot('view', $book)) {
                 return $this->notAuthorized('You are not authorized to view this book');
             }
@@ -57,7 +58,7 @@
         /**
          * Update the specified resource in storage.
          */
-        public function update(UpdateBookRequest $request, Book $book) {
+        public function update(ValidatesRequest $request, Book $book) {
             if (Auth::user()->cannot('update', $book)) {
                 return $this->notAuthorized('You are not authorized to update this book');
             }

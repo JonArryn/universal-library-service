@@ -23,8 +23,8 @@
         // book
         Route::get('/book', [BookController::class, 'index']);
         Route::get('/book/{book}', [BookController::class, 'show']);
-        Route::post('/book', [BookController::class, 'store']);
-        Route::put('/book/{book}', [BookController::class, 'update']);
+        Route::post('/book', [BookController::class, 'store'])->name('books.store');
+        Route::put('/book/{book}', [BookController::class, 'update'])->name('books.update');
         Route::delete('/book/{book}', [BookController::class, 'destroy']);
 
 

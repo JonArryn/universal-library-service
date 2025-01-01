@@ -2,6 +2,7 @@
 
     namespace App\Http\Requests\Api\Book;
 
+    use App\Http\Requests\Api\ValidatesRequest;
     use App\Models\Book;
     use App\Rules\ValidLibraryOwnership;
     use Illuminate\Foundation\Http\FormRequest;
@@ -10,7 +11,7 @@
     /**
      * @Mixin Book
      */
-    class StoreBookRequest extends BaseBookRequest
+    class StoreBookRequest extends BaseBookRequest implements ValidatesRequest
     {
         /**
          * Determine if the user is authorized to make this request.

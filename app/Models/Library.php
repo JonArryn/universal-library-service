@@ -29,7 +29,7 @@
             return $this->belongsTo(User::class);
         }
 
-        public function book(): HasMany {
+        public function books(): HasMany {
             return $this->hasMany(Book::class);
         }
     }

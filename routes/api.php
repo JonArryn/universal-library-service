@@ -3,6 +3,7 @@
     use App\Http\Controllers\Api\BookController;
     use App\Http\Controllers\Api\LibraryBookController;
     use App\Http\Controllers\Api\LibraryController;
+    use App\Http\Controllers\Api\ReportController;
     use App\Http\Controllers\Api\UserController;
     use App\Http\Controllers\AuthController;
     use Illuminate\Http\Request;
@@ -26,6 +27,7 @@
         Route::put('/book/{book}', [BookController::class, 'update']);
         Route::delete('/book/{book}', [BookController::class, 'destroy']);
 
+
         // library
         Route::get('/library', [LibraryController::class, 'index']);
         Route::get('/library/{library}', [LibraryController::class, 'show']);
@@ -33,5 +35,7 @@
         Route::get('/library/{library}/book', [LibraryBookController::class, 'index']);
         Route::post('/library/{library}/book', [LibraryBookController::class, 'store']);
 
+        //report
+        Route::get('/report/libraryBookCount', [ReportController::class, 'libraryBookCount']);
     });
 

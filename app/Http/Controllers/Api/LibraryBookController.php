@@ -22,7 +22,7 @@
             }
             $library = Library::findOrFail($library);
 
-            $books = $library->book()->filter($filters)->paginate(15);
+            $books = $library->books()->filter($filters)->paginate(15);
 
             return BookResource::collection($books);
         }
@@ -36,7 +36,7 @@
             if (! $request->user()->can('create', $newBook)) {
                 return $this->notAuthorized('You are not authorized to create books in this library.');
             }
-            $libraryBook = $library->book()->create($request->mappedAttributes());
+            $libraryBook = $library->books()->create($request->mappedAttributes());
             return $this->ok('success',
                 ['book' => new BookResource($libraryBook)],
                 201
